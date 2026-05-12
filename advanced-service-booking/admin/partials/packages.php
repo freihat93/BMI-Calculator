@@ -1,21 +1,19 @@
 <?php
-/**
- * Packages CRUD
- */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 global $wpdb;
 $table_name = $wpdb->prefix . 'asb_packages';
 $tabs_table = $wpdb->prefix . 'asb_service_tabs';
 
 if ( isset( $_POST['asb_save_package'] ) && check_admin_referer( 'asb_save_package_nonce' ) ) {
-    $data = array(
+    $data = [
         'service_tab_id' => intval( $_POST['service_tab_id'] ),
         'title'          => sanitize_text_field( $_POST['title'] ),
-        'description'    => sanitize_textarea_field( $_POST['description'] ),
         'price'          => floatval( $_POST['price'] ),
+        'description'    => sanitize_textarea_field( $_POST['description'] ),
         'status'         => 'active',
-    );
+    ];
     $wpdb->insert( $table_name, $data );
-    echo '<div class="updated"><p>Package saved!</p></div>';
 }
 
 $packages = $wpdb->get_results( "SELECT p.*, t.title as tab_title FROM $table_name p JOIN $tabs_table t ON p.service_tab_id = t.id" );
@@ -39,7 +37,7 @@ $tabs = $wpdb->get_results( "SELECT id, title FROM $tabs_table" );
                 <thead><tr><th>Title</th><th>Tab</th><th>Price</th></tr></thead>
                 <tbody>
                     <?php foreach($packages as $pkg): ?>
-                    <tr><td><?php echo esc_html($pkg->title); ?></td><td><?php echo esc_html($pkg->tab_title); ?></td><td><?php echo $pkg->price; ?></td></tr>
+                    <tr><td><?php echo esc_html($pkg->title); ?></td><td><?php echo esc_html($pkg->tab_title); ?></td><td>$<?php echo $pkg->price; ?></td></tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>

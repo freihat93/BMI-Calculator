@@ -1,23 +1,19 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 global $wpdb;
 $table_name = $wpdb->prefix . 'asb_service_tabs';
 
 if ( isset( $_POST['asb_save_tab'] ) && check_admin_referer( 'asb_save_tab_nonce' ) ) {
-    $id = isset( $_POST['id'] ) ? intval( $_POST['id'] ) : 0;
-    $data = array(
+    $data = [
         'title'       => sanitize_text_field( $_POST['title'] ),
         'icon'        => sanitize_text_field( $_POST['icon'] ),
         'description' => sanitize_textarea_field( $_POST['description'] ),
         'badge'       => sanitize_text_field( $_POST['badge'] ),
         'sort_order'  => intval( $_POST['sort_order'] ),
         'status'      => sanitize_text_field( $_POST['status'] ),
-    );
-    if ( $id ) {
-        $wpdb->update( $table_name, $data, array( 'id' => $id ) );
-    } else {
-        $wpdb->insert( $table_name, $data );
-    }
-    echo '<div class="updated"><p>Service Tab saved!</p></div>';
+    ];
+    $wpdb->insert( $table_name, $data );
 }
 
 $tabs = $wpdb->get_results( "SELECT * FROM $table_name ORDER BY sort_order ASC" );
@@ -26,11 +22,11 @@ $tabs = $wpdb->get_results( "SELECT * FROM $table_name ORDER BY sort_order ASC" 
     <h1>Service Tabs</h1>
     <div style="display: flex; gap: 20px;">
         <div style="flex: 1; background: #fff; padding: 20px; border: 1px solid #ccd0d4;">
-            <h2>Add New Tab</h2>
+            <h3>Add New Tab</h3>
             <form method="post">
                 <?php wp_nonce_field( 'asb_save_tab_nonce' ); ?>
                 <p><label>Title</label><br><input type="text" name="title" required class="large-text"></p>
-                <p><label>Icon</label><br><input type="text" name="icon" class="large-text"></p>
+                <p><label>Icon (Dashicon name)</label><br><input type="text" name="icon" class="large-text"></p>
                 <p><label>Description</label><br><textarea name="description" class="large-text"></textarea></p>
                 <p><label>Badge</label><br><input type="text" name="badge" class="regular-text"></p>
                 <p><label>Sort Order</label><br><input type="number" name="sort_order" value="0"></p>

@@ -1,12 +1,6 @@
-.asb-wrapper { max-width: 1200px; margin: 40px auto; font-family: sans-serif; }
-.asb-container { display: flex; gap: 30px; }
-.asb-main { flex: 2; }
-.asb-sidebar { flex: 1; position: sticky; top: 20px; background: #f9f9f9; padding: 20px; border-radius: 8px; height: fit-content; }
-.asb-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-.asb-tab { padding: 10px 20px; border: 1px solid #ccc; cursor: pointer; border-radius: 4px; }
-.asb-tab.active { background: #007bff; color: #fff; border-color: #007bff; }
-.asb-packages { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.asb-package { border: 1px solid #eee; padding: 15px; border-radius: 8px; cursor: pointer; }
-.asb-package.selected { border-color: #007bff; background: #e7f3ff; }
-.asb-form { margin-top: 40px; padding: 20px; border: 1px solid #eee; border-radius: 8px; }
-.asb-form input, .asb-form textarea { width: 100%; margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; }
+.asb-booking-wrapper { display: flex; flex-direction: column; gap: 20px; }
+.asb-builder-container { display: flex; gap: 30px; }
+.asb-main-content { flex: 2; }
+.asb-sidebar { flex: 1; border: 1px solid #ddd; padding: 20px; border-radius: 8px; }
+.asb-tab-trigger { padding: 10px 20px; cursor: pointer; }
+.asb-package-item { border: 1px solid #eee; padding: 15px; margin-bottom: 10px; }
