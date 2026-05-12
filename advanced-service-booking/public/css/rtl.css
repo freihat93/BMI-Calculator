@@ -1,0 +1,3 @@
+body.rtl .asb-container { flex-direction: row-reverse; }
+body.rtl .asb-sidebar { order: -1; }
+body.rtl .asb-tab-btn { text-align: right; }
